@@ -3,44 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar Example</title>
+    <title>Ecommerce Web Design</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <div class="navbar">
-            <!-- Left Section: Logo -->
-            <div class="logo">
-                <img src="logo.png" alt="Brand Logo">
-            </div>
 
-            <!-- Center Section: Search and Category -->
-            <div class="search-section">
-                <select name="category" class="category-dropdown">
-                    <option value="all">All category</option>
+   <!-- Header Section -->
+       <!-- first navbar -->
+
+<body>
+     <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="logo-colored.png" alt="Brand Logo">
+            </div>
+            <div class="search-bar-container" style="display: flex; align-items: center;">
+                <select class="category-dropdown">
+                    <option value="all">All Categories</option>
                     <option value="electronics">Electronics</option>
-                    <option value="clothes">Clothes</option>
-                    <!-- Add more categories -->
+                    <option value="fashion">Fashion</option>
+                    <option value="home">Home</option>
                 </select>
                 <div class="search-bar">
                     <input type="text" placeholder="Search">
-                    <button type="button">Search</button>
+                    <button>Search</button>
                 </div>
             </div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#">
+                        <img src="images\VectorProfile.svg" alt="Profile Icon" class="nav-icon">
+                        <span>Profile</span>
+                    </a></li>
+                    <li><a href="#">
+                        <img src="images\Vectormesasages.svg" alt="Message Icon" class="nav-icon">
+                        <span>Messages</span>
+                    </a></li>
+                    <li><a href="#">
+                        <img src="images\Vectororders.svg" alt="Order Icon" class="nav-icon">
+                        <span>Orders</span>
+                    </a></li>
+                    <li><a href="#">
+                        <img src="images\Vectorcart.svg" alt="Cart Icon" class="nav-icon">
+                        <span>MyCart</span>
+                    </a></li>
+                </ul>
+            </nav>
+            
+            
+            
+        </div>
+    </header>
+   
+<!-- second navbar -->
+ 
+    <nav class="bg-white border-b py-2">
+        <div class="container mx-auto flex items-center justify-between px-4">
+          <!-- Left Section: All Categories Dropdown + Links -->
+          <div class="flex items-center space-x-6">
+            <!-- All Categories Dropdown -->
+            <div class="relative group">
+              <button class="flex items-center text-sm bg-blue-500 text-white px-3 py-1 rounded focus:outline-none">
+                <span>All Categories</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <!-- Dropdown Menu -->
+              <div class="absolute left-0 hidden w-48 bg-white shadow-lg group-hover:block z-10">
+                <ul class="divide-y divide-gray-200">
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">Automobiles</a>
+                  </li>
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">Clothes and Wear</a>
+                  </li>
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">Home Interiors</a>
+                  </li>
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">Computer and Tech</a>
+                  </li>
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">Tools, Equipment</a>
+                  </li>
+                  <li class="px-4 py-2 hover:bg-gray-100">
+                    <a href="#" class="text-gray-700 text-sm">More Categories</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Other Navigation Links -->
+            <div class="flex items-center space-x-4">
+              <a href="#" class="text-gray-600 text-sm hover:text-blue-500">Hot Offers</a>
+              <a href="#" class="text-gray-600 text-sm hover:text-blue-500">Gift Boxes</a>
+              <a href="#" class="text-gray-600 text-sm hover:text-blue-500">Projects</a>
+              <a href="#" class="text-gray-600 text-sm hover:text-blue-500">Menu Item</a>
+              <a href="#" class="text-gray-600 text-sm hover:text-blue-500">Help</a>
+            </div>
+          </div>
+      
+          <!-- Right Section: Language and Region -->
+          <div class="flex items-center space-x-4">
+            <select class="text-sm border-gray-300 rounded px-2 py-1">
+              <option>English, USD</option>
+            </select>
+            <select class="text-sm border-gray-300 rounded px-2 py-1">
+              <option>Germany</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+      
 
-            <!-- Right Section: Links and Icons -->
-            <div class="navbar-links">
-                <a href="#">Profile</a>
-                <a href="#">Message</a>
-                <a href="#">My Cart</a>
-                <div class="language-dropdown">
-                    <span>English, USD</span>
+
+
+
+
+
+
+ 
+    <!-- sidebar menu Section -->
+
+    <body>
+        <div class="container">
+            <!-- Sidebar -->
+            <div class="sidebar-menu">
+                <ul class="categories-list">
+                    <li class="active">Automobiles</li>
+                    <li>Clothes and Wear</li>
+                    <li>Home Interiors</li>
+                    <li>Computer and Tech</li>
+                    <li>Tools, Equipments</li>
+                    <li>Sports and Outdoor</li>
+                    <li>Animal and Pets</li>
+                    <li>Machinery Tools</li>
+                    <li>More Category</li>
+                </ul>
+            </div>
+    
+            <!-- Main Content -->
+            <div class="trending-section">
+                <div class="trending-content">
+                  <h2>Latest trending <span>Electronic items</span></h2>
+                  <button class="learn-more-btn">Learn more</button>
                 </div>
-                <div class="ship-to">
-                    <span>Ship to</span>
+                <img src="images\Mask grouplearnmoremainbanner.svg" alt="Headphones" class="trending-image">
+              </div>
+
+              
+              
+    
+                <!-- User Section -->
+                <div class="user-section">
+                    <h3>Hi, user <br> Let’s get started</h3>
+                    <button class="join-now-btn">Join now</button>
+                    <button class="login-btn">Log in</button>
+                    <div class="offers">
+                        <p>Get US $10 off <br> with a new supplier</p>
+                        <p>Send quotes with <br> supplier preferences</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
-</body>
-</html>
+    </body>
+
+
+      
+    <!-- Hero Section -->
+   
+ <!-- Deals and offers  -->
+
+ <div class="deals-offers-container">
+  
+    
+    <div class="deals-content">
+        <!-- Timer Section -->
+        <body>
+            <div class="countdown-container">
+                    <h2>Deals and Offers</h2>
+                    <p>Hygiene Equipment</p>
+                    <div class="countdown">
+                        <div class="time-box">
+                            <span class="time" id="days">00</span>
+                            <span class="label">Days</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time" id="hours">00</span>
+                            <span class="label">Hours</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time" id="minutes">00</span>
+                            <span class="label">Minutes</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time" id="seconds">00</span>
+                            <span class="label">Seconds</span>
+                </div>
+              </div>
+            </div>
+          </body>
+
+
+
+        
+        <!-- Deals Items Section -->
+        <div class="deals-items">
+            <div class="deal-item">
+                <img src="images\8Smartwatchimg.svg" alt="Smart watches">
+                <p>Smart watches</p>
+                <span class="discount">-25%</span>
+            </div>
+            <div class="deal-item">
+                <img src="images\7Laptops.svg" alt="Laptops">
+                <p>Laptops</p>
+                <span class="discount">-15%</span>
+            </div>
+            <div class="deal-item">
+                <img src="images\6cameramain.svg" alt="GoPro cameras">
+                <p>GoPro cameras</p>
+                <span class="discount">-40%</span>
+            </div>
+            <div class="deal-item">
+                <img src="images\5headphones.svg" alt="Headphones">
+                <p>Headphones</p>
+                <span class="discount">-25%</span>
+            </div>
+            <div class="deal-item">
+                <img src="images\3cellphone.svg" alt="Canon cameras">
+                <p>Canon cameras</p>
+                <span class="discount">-25%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    <!-- Product Listing Section -->
+    <section class="product-listing">
+        <div class="container">
+            <h2>Home and Outdoor</h2>
+            <div class="product-grid">
+                <!-- Example Product Card -->
+                <div class="product-card">
+                    <img src="product1.jpg" alt="Smart Watch">
+                    <h3>Soft chairs</h3>
+                    <p>-19</p>
+                </div>
+                <!-- Add more product cards -->
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer Section -->
+    <footer>
+      
+
+
+
+
+
+
+<div class="bg-gray-100 py-8 px-6 ml-8">
+  <h2 class="text-lg font-semibold mb-4">Suppliers by region</h2>
+  <div class="grid grid-cols-4 gap-6">
+    <!-- Supplier Arabic Emirates -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconArabic2.svg" alt="Arabic Emirates" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Arabic Emirates</p>
+        <p class="text-xs text-gray-500">shopname.ae</p>
+      </div>
+    </div>
+    <!-- Supplier Australia -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconAustralia.svg" alt="Australia" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Australia</p>
+        <p class="text-xs text-gray-500">shopname.ae</p>
+      </div>
+    </div>
+    <!-- Supplier usa -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconusa.svg" alt="United States" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">United States</p>
+        <p class="text-xs text-gray-500">shopname.ae</p>
+      </div>
+    </div>
+    <!-- Supplier Russia -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconrussia.svg" alt="Russia" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Russia</p>
+        <p class="text-xs text-gray-500">shopname.ru</p>
+      </div>
+    </div>
+    <!-- Supplier Italy -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconitaly.svg" alt="Italy" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Italy</p>
+        <p class="text-xs text-gray-500">shopname.it</p>
+      </div>
+    </div>
+    <!-- Supplier Denmark -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconDenmark.svg" alt="Denmark" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Denmark</p>
+        <p class="text-xs text-gray-500">denmark.com.dk</p>
+      </div>
+    </div>
+    <!-- Supplier France -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconfrance.svg" alt="France" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">France</p>
+        <p class="text-xs text-gray-500">shopname.com.fr</p>
+      </div>
+    </div>
+    <!-- Supplier China -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconchina.svg" alt="China" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">China</p>
+        <p class="text-xs text-gray-500">shopname.ae</p>
+      </div>
+    </div>
+    <!-- Supplier Great Britain -->
+    <div class="flex items-center space-x-2">
+      <img src="images\iconGreatBritain.svg" alt="Great Britain" class="w-6 h-4">
+      <div>
+        <p class="text-sm font-medium">Great Britain</p>
+        <p class="text-xs text-gray-500">shopname.co.uk</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      <!-- Subscribe to our newsletter -->
+      <body>
+        <footer>
+          <div class="newsletter">
+            <p>Subscribe on our newsletter</p>
+            <span>Get daily news on upcoming offers from many suppliers all over the world</span>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Email">
+              <button>Subscribe</button>
+            </div>
+          </div>
+          <div class="footer-content">
+            <div class="brand">
+                <img src="images\logo-coloredfooterbrandlogo.svg" alt="Brand" class="brand" />
+              <p>Best information about the company goes here but now lorem ipsum is.</p>
+              <div class="social-icons">
+                <a href="#"><img src="images\Fill 183facebook.svg" alt="Facebook"></a>
+                <a href="#"><img src="images\twitter3twitter.svg" alt="Twitter"></a>
+                <a href="#"><img src="images\Fill 209linkd.svg" alt="LinkedIn"></a>
+                <a href="#"><img src="images\instagram3instagram.svg" alt="Instagram"></a>
+                <a href="#"><img src="images\youtube3youtube.svg" alt="youtube"></a>
+              </div>
+            </div>
+            <div class="footer-links">
+              <div>
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Find Store</a>
+                <a href="#">Categories</a>
+                <a href="#">Blogs</a>
+              </div>
+              <div>
+                <h4>Partnership</h4>
+                <a href="#">About Us</a>
+                <a href="#">Find Store</a>
+                <a href="#">Categories</a>
+                <a href="#">Blogs</a>
+              </div>
+              <div>
+                <h4>Information</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Money Refund</a>
+                <a href="#">Shipping</a>
+                <a href="#">Contact Us</a>
+              </div>
+              <div>
+                <h4>For Users</h4>
+                <a href="#">Login</a>
+                <a href="#">Register</a>
+                <a href="#">Settings</a>
+                <a href="#">My Orders</a>
+              </div>
+              <div>
+                <h4>Get App</h4>
+                
+                <img src="images\market-buttonappstore.svg" alt="Download on App Store" class="app-badge">
+                <img src="images\Groupgoogleplay.svg" alt="Get it on Google Play" class="app-badge">
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>© 2025 Ecommerce.</p>
+                    <div class="language-dropdown">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </div>
+          
+          </div>
+        </footer>
+      </body>
+      </html>
+
+
+
+     
