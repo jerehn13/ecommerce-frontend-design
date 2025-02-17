@@ -605,76 +605,371 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  let cartItems = [];
-  const cartContent = document.getElementById("cartContent");
-  const checkoutSection = document.getElementById("checkoutSection");
-  const checkoutButton = document.getElementById("checkoutButton");
-  const backToCartButton = document.getElementById("backToCart");
-  const subtotalAmount = document.getElementById("subtotalAmount");
-  const discountAmount = document.getElementById("discountAmount");
-  const totalAmount = document.getElementById("totalAmount");
-
-  // Function to show only the specified section
-  const showOnlySection = (sectionToShow) => {
-    document.querySelectorAll("body > *:not(.header):not(footer)").forEach((el) => {
-      el.style.display = el === sectionToShow ? "block" : "none";
+    // Chat gpt 1
+    document.addEventListener("DOMContentLoaded", () => {
+      // Get references to checkout elements
+      const checkoutSection = document.getElementById("checkoutSection");
+      const backToCartButton = document.getElementById("backToCart");
+      const completeOrderButton = document.getElementById("completeOrder");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+    
+      // Input Fields
+      const firstName = document.getElementById("firstName");
+      const lastName = document.getElementById("lastName");
+      const address = document.getElementById("address");
+      const city = document.getElementById("city");
+      const postalCode = document.getElementById("postalCode");
+      const cardNumber = document.getElementById("cardNumber");
+      const expiryDate = document.getElementById("expiryDate");
+      const cvv = document.getElementById("cvv");
+    
+      // Function to validate inputs
+      function validateInputs() {
+        if (
+          !firstName.value.trim() ||
+          !lastName.value.trim() ||
+          !address.value.trim() ||
+          !city.value.trim() ||
+          !postalCode.value.trim() ||
+          !cardNumber.value.trim() ||
+          !expiryDate.value.trim() ||
+          !cvv.value.trim()
+        ) {
+          alert("Please fill in all fields.");
+          return false;
+        }
+    
+        if (!/^\d{16}$/.test(cardNumber.value)) {
+          alert("Invalid card number. Must be 16 digits.");
+          return false;
+        }
+    
+        if (!/^\d{3,4}$/.test(cvv.value)) {
+          alert("Invalid CVV. Must be 3 or 4 digits.");
+          return false;
+        }
+    
+        return true;
+      }
+    
+      // Complete Order Button - Shows Loading Spinner before completion
+      completeOrderButton.addEventListener("click", () => {
+        if (!validateInputs()) return;
+    
+        // Show loading spinner
+        loadingSpinner.classList.remove("hidden");
+    
+        setTimeout(() => {
+          loadingSpinner.classList.add("hidden");
+          alert("Order placed successfully!");
+          checkoutSection.style.display = "none"; // Hide checkout after completion
+        }, 2000);
+      });
+      
+    
+      // Back to Cart - Navigates user back to cart
+      backToCartButton.addEventListener("click", () => {
+        checkoutSection.style.display = "none";
+        document.getElementById("cartContent").style.display = "block";
+      });
     });
-  };
-
-  // Function to update the order summary in checkout
-  const updateOrderSummary = () => {
-    let subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    let discount = subtotal * 0.05; // this code i wrote Applies 5% discount for demonstration
-    let total = subtotal - discount;
-
-    subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-    discountAmount.textContent = `-$${discount.toFixed(2)}`;
-    totalAmount.textContent = `$${total.toFixed(2)}`;
-  };
-
-  // Show checkout page when clicking "Checkout" button
-  if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
-      updateOrderSummary();
-      showOnlySection(checkoutSection);
-    });
-  }
-
-  // Go back to cart when clicking "Back to Cart"
-  if (backToCartButton) {
-    backToCartButton.addEventListener("click", () => {
-      showOnlySection(cartContent);
-    });
-  }
-
-  // Simulate completing the order
-  const completeOrderButton = document.getElementById("completeOrder");
-  if (completeOrderButton) {
-    completeOrderButton.addEventListener("click", () => {
-      alert("Order placed successfully!");
-      cartItems = []; 
-      updateOrderSummary();
-      showOnlySection(cartContent);
-    });
-  }
-
-  // Ensure checkout page is hidden initially
-  checkoutSection.style.display = "none";
-});
 
 
 
 
-// side filter javascript
 
-function toggleSection(sectionId, arrowId) {
-  const section = document.getElementById(sectionId);
-  const arrow = document.getElementById(arrowId);
-  
-  if (section) {
-    section.classList.toggle("hidden");
-    arrow.classList.toggle("rotate-180");
-  }
+    
+
+
+
+
+          // login form
+          document.addEventListener("DOMContentLoaded", () => {
+            const loginButton = document.querySelector(".w-full.bg-white.text-blue-600");
+            const loginForm = document.getElementById("loginForm");
+            const goBackToProfileButton = document.getElementById("goBackToProfile");
+            const profileSection = document.getElementById("profile-icon"); // Profile section trigger
+            const mainSections = document.querySelectorAll("body > *:not(.header):not(footer):not(#loginForm)");
+          
+            if (loginButton && loginForm) {
+              loginButton.addEventListener("click", (e) => {
+                e.preventDefault();
+          
+                // Hide all sections except login form
+                mainSections.forEach((el) => (el.style.display = "none"));
+          
+                loginForm.classList.remove("hidden");
+                loginForm.style.display = "flex"; // Ensure login form is visible
+              });
+            }
+          
+            if (goBackToProfileButton && profileSection) {
+              goBackToProfileButton.addEventListener("click", (e) => {
+                e.preventDefault();
+          
+                // Hide login form properly
+                loginForm.style.display = "none";
+                loginForm.classList.add("hidden");
+          
+                // Restore all sections
+                mainSections.forEach((el) => (el.style.display = ""));
+          
+                // Scroll to profile section
+                profileSection.scrollIntoView({ behavior: "smooth" });
+              });
+            }
+          });
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // Function to handle login
+
+
+          document.addEventListener("DOMContentLoaded", () => {
+            const loginButton = document.querySelector(".w-full.bg-white.text-blue-600");
+            const loginForm = document.getElementById("loginForm");
+            const goBackToProfileButton = document.getElementById("goBackToProfile");
+            const profileSection = document.getElementById("profile-icon");
+            const mainSections = document.querySelectorAll("body > *:not(.header):not(footer):not(#loginForm):not(#dashboard)");
+            const dashboard = document.getElementById("dashboard");
+            const logoutButton = document.getElementById("logout");
+            const userNameElement = document.getElementById("userName");
+            
+            // Function to handle login
+            function handleLogin(event) {
+              event.preventDefault();
+          
+              const email = document.getElementById("email").value.trim();
+              const password = document.getElementById("password").value.trim();
+          
+              if (email === "" || password === "") {
+                alert("Please enter email and password.");
+                return;
+              }
+          
+              // Simulate authentication (In a real app, you'd verify this with a backend)
+              localStorage.setItem("isLoggedIn", "true");
+              localStorage.setItem("userName", email); // Store user name
+          
+              showDashboard(email);
+            }
+          
+            // Function to show dashboard
+            function showDashboard(email) {
+              mainSections.forEach((el) => (el.style.display = "none"));
+              loginForm.style.display = "none";
+              loginForm.classList.add("hidden");
+          
+              dashboard.classList.remove("hidden");
+              dashboard.style.display = "flex";
+          
+              userNameElement.textContent = email.split("@")[0]; // Show only username
+            }
+          
+            // Function to handle logout
+            function handleLogout() {
+              localStorage.removeItem("isLoggedIn");
+              localStorage.removeItem("userName");
+          
+              dashboard.classList.add("hidden");
+              dashboard.style.display = "none";
+          
+              mainSections.forEach((el) => (el.style.display = ""));
+            }
+          
+            // Check if user is already logged in (persistent session)
+            if (localStorage.getItem("isLoggedIn") === "true") {
+              showDashboard(localStorage.getItem("userName"));
+            }
+          
+            // Event Listeners
+            if (loginButton) loginButton.addEventListener("click", handleLogin);
+            if (logoutButton) logoutButton.addEventListener("click", handleLogout);
+            if (goBackToProfileButton) {
+              goBackToProfileButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginForm.style.display = "none";
+                loginForm.classList.add("hidden");
+                mainSections.forEach((el) => (el.style.display = ""));
+                profileSection.scrollIntoView({ behavior: "smooth" });
+              });
+            }
+          });
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          const showRegisterForm = document.getElementById("showRegisterForm");
+
+if (showRegisterForm) {
+  showRegisterForm.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+  });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.querySelector(".w-full.bg-white.text-blue-600");
+  const registerForm = document.getElementById("registerForm");
+  const loginForm = document.getElementById("loginForm");
+  const dashboard = document.getElementById("dashboard");
+  const goBackToLoginButton = document.getElementById("goBackToLogin");
+  const userNameElement = document.getElementById("userName");
+  const logoutButton = document.getElementById("logout");
+
+  // Register Form Elements
+  const registerSubmitForm = document.getElementById("registerSubmitForm");
+  const registerEmail = document.getElementById("registerEmail");
+  const registerPassword = document.getElementById("registerPassword");
+
+  // Login Form Elements
+  const loginSubmitForm = document.getElementById("loginSubmitForm");
+  const loginEmail = document.getElementById("email");
+  const loginPassword = document.getElementById("password");
+
+  // Function to register a new user
+  function handleRegister(event) {
+    event.preventDefault();
+
+    const email = registerEmail.value.trim();
+    const password = registerPassword.value.trim();
+
+    if (email === "" || password === "") {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if user already exists
+    if (users.some((user) => user.email === email)) {
+      alert("Email is already registered. Please log in.");
+      return;
+    }
+
+    // Save new user
+    users.push({ email, password });
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Registration successful! You can now log in.");
+
+    // Hide register form and show login form
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+  }
+
+  // Function to handle login
+  function handleLogin(event) {
+    event.preventDefault();
+
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+
+    if (email === "" || password === "") {
+      alert("Please enter email and password.");
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if user exists and password matches
+    const user = users.find((user) => user.email === email && user.password === password);
+
+    if (!user) {
+      alert("Invalid email or password.");
+      return;
+    }
+
+    // Store login session
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", email);
+
+    showDashboard(email);
+  }
+
+  // Function to show dashboard after login
+  function showDashboard(email) {
+    loginForm.classList.add("hidden");
+    registerForm.classList.add("hidden");
+
+    dashboard.classList.remove("hidden");
+    dashboard.style.display = "flex";
+
+    userNameElement.textContent = email.split("@")[0];
+  }
+
+  // Function to handle logout
+  function handleLogout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+
+    dashboard.classList.add("hidden");
+
+    loginForm.classList.remove("hidden");
+  }
+
+  // Check if user is already logged in
+  if (localStorage.getItem("isLoggedIn") === "true") {
+    showDashboard(localStorage.getItem("userName"));
+  }
+
+  // Event Listeners
+  if (registerSubmitForm) registerSubmitForm.addEventListener("submit", handleRegister);
+  if (loginSubmitForm) loginSubmitForm.addEventListener("submit", handleLogin);
+  if (logoutButton) logoutButton.addEventListener("click", handleLogout);
+  if (goBackToLoginButton) {
+    goBackToLoginButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+  }
+});

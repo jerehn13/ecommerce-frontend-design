@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <script src="main.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+   
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
     
 
 </head>
@@ -414,6 +419,10 @@
     <button id="backToShop" class="bg-blue-500 text-white px-4 py-2 rounded mt-3 hover:bg-blue-700">
       Back to Shop
     </button>
+
+
+
+    
   </div>
 </div>
 
@@ -685,12 +694,17 @@
               <h3 class="text-md font-semibold">Hi, user<br>let’s get started</h3>
             </div>
             <!-- Buttons -->
-            <button class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-              Join now
-            </button>
-            <button class="w-full bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100">
-              Log in
-            </button>
+            <a href="register.html" class="block mt-6"> 
+              <button class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                Join now
+              </button>
+            </a>
+            
+            
+            <button onclick="window.location.href='login.html'" 
+            class="w-full bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100">
+            Log in
+          </button>
           </div>
           <!-- Offer Boxes -->
           <div class="bg-orange-500 text-white p-3 rounded-lg text-sm">
@@ -702,7 +716,6 @@
         </div>
       </div>
     </body>
-    
     
     
     <!-- Hero Section -->
@@ -793,6 +806,43 @@
         <div class="grid grid-cols-2 gap-2 mt-2">
           <label class="block">City <input type="text" class="w-full border p-2 rounded" id="city"></label>
           <label class="block">Postal Code <input type="text" class="w-full border p-2 rounded" id="postalCode"></label>
+          <!-- Order Review Section -->
+          <div class="w-[650px] mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
+        
+            <div class="flex justify-between py-2 text-lg">
+                <p class="text-gray-700">Subtotal</p>
+                <p id="subtotal" class="font-semibold">$0.00</p>
+            </div>
+        
+            <div class="flex justify-between py-2 text-lg">
+                <p class="text-green-600">Discount</p>
+                <p id="discount" class="text-green-600 font-semibold">-$0.00</p>
+            </div>
+        
+            <div class="flex justify-between py-2 text-lg">
+                <p class="text-gray-700">Shipping</p>
+                <p id="shipping" class="font-semibold">Free</p>
+            </div>
+        
+            <hr class="my-3 border-t-2 border-gray-300">
+        
+            <div class="flex justify-between py-2 text-xl font-bold">
+                <p>Total</p>
+                <p id="total">$0.00</p>
+            </div>
+        
+            <!-- Loading Spinner (Hidden Initially) -->
+            <div id="loadingSpinner" class="hidden text-center my-4">
+                <p class="text-gray-600 text-lg">Processing...</p>
+            </div>
+        
+            <button id="completeOrder" class="bg-green-500 text-white px-6 py-2 rounded mt-4 hover:bg-green-600">Place Order</button>
+        </div>
+        
+        
+        
+        
         </div>
       </div>
       
@@ -805,13 +855,198 @@
         <div class="grid grid-cols-2 gap-2 mt-2">
           <label class="block">Expiry Date <input type="text" class="w-full border p-2 rounded" placeholder="MM/YY" id="expiryDate"></label>
           <label class="block">CVV <input type="text" class="w-full border p-2 rounded" id="cvv"></label>
+       
+          <button id="backToCart" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700">Back to Cart</button>
+
+
+
+      
+      
+        
+
+
         </div>
       </div>
     </div>
-    <button id="completeOrder" class="bg-green-500 text-white px-6 py-2 rounded mt-4 hover:bg-green-600">Place Order</button>
-    <button id="backToCart" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700">Back to Cart</button>
+   
   </div>
 </div>
+
+
+
+
+    <!-- order confirmation Section -->
+<!-- Login Page -->
+
+
+<!-- Dashboard Layout -->
+<!-- Dashboard (Initially Hidden) -->
+<div id="dashboard" class="hidden min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-6 rounded shadow-md w-96">
+    <h2 class="text-2xl font-semibold mb-4">Welcome, <span id="userName"></span></h2>
+    <p class="text-gray-600">You are now logged in.</p>
+    <nav class="mt-4">
+      <a href="#" class="block py-2 hover:bg-gray-100 rounded">Orders</a>
+      <a href="#" class="block py-2 hover:bg-gray-100 rounded">Account Settings</a>
+    </nav>
+    <button id="logout" class="w-full bg-red-500 text-white py-2 rounded mt-4 hover:bg-red-600">
+      Logout
+    </button>
+  </div>
+</div>
+
+
+   
+
+
+  
+
+
+
+
+
+  <!-- Order Summary javascript -->
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Load cart from localStorage or initialize an empty array
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Get references to UI elements
+    const checkoutSection = document.getElementById("checkoutSection");
+    const productListView = document.getElementById("webListView"); // Ensure this ID exists
+    const cartItemsContainer = document.getElementById("cartItemsContainer");
+    const emptyCartMessage = document.getElementById("emptyCartMessage");
+    const subtotalElement = document.getElementById("subtotal");
+    const discountElement = document.getElementById("discount");
+    const shippingElement = document.getElementById("shipping");
+    const totalElement = document.getElementById("total");
+    const placeOrderBtn = document.getElementById("placeOrderBtn");
+    const loadingSpinner = document.getElementById("loadingSpinner");
+
+    // Function to save cart to localStorage
+    function saveCartToLocalStorage() {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+
+    // Function to update the Order Summary UI
+    function updateOrderSummary() {
+        let subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        let discount = subtotal > 500 ? subtotal * 0.03 : 0; // 3% discount if subtotal > $500
+        let shipping = cartItems.length > 0 ? "Free" : "$0.00";
+        let total = subtotal - discount; // Total is now correctly calculated
+
+        // Update UI with calculated values
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        discountElement.textContent = `-$${discount.toFixed(2)}`;
+        shippingElement.textContent = shipping;
+        totalElement.textContent = `$${total.toFixed(2)}`;
+
+        // Save updated cart data
+        saveCartToLocalStorage();
+    }
+
+    // Function to update the Cart UI
+    function updateCartUI() {
+        cartItemsContainer.innerHTML = ""; // Clear existing items
+
+        if (cartItems.length === 0) {
+            emptyCartMessage.classList.remove("hidden");
+            placeOrderBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+            placeOrderBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+            placeOrderBtn.setAttribute("disabled", "true");
+        } else {
+            emptyCartMessage.classList.add("hidden");
+            placeOrderBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+            placeOrderBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
+            placeOrderBtn.removeAttribute("disabled");
+        }
+
+        cartItems.forEach((item, index) => {
+            const cartItem = document.createElement("div");
+            cartItem.classList.add("flex", "justify-between", "items-center", "border-b", "pb-2", "mb-2");
+
+            cartItem.innerHTML = `
+                <div>
+                    <p class="font-medium">${item.name}</p>
+                    <p class="text-gray-600">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                </div>
+                <div class="flex items-center">
+                    <input type="number" min="1" value="${item.quantity}" data-index="${index}" 
+                        class="quantity-input w-12 text-center border border-gray-300 rounded">
+                    <button class="remove-item text-red-500 ml-2" data-index="${index}">Remove</button>
+                </div>
+            `;
+
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        // Attach event listeners for quantity changes
+        document.querySelectorAll(".quantity-input").forEach(input => {
+            input.addEventListener("change", (e) => {
+                const index = parseInt(e.target.dataset.index);
+                const newQuantity = parseInt(e.target.value);
+                if (newQuantity > 0) {
+                    cartItems[index].quantity = newQuantity;
+                    saveCartToLocalStorage();
+                    updateCartUI();
+                    updateOrderSummary();
+                }
+            });
+        });
+
+        // Attach event listeners to remove buttons
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", (e) => {
+                const index = parseInt(e.target.dataset.index);
+                cartItems.splice(index, 1);
+                saveCartToLocalStorage();
+                updateCartUI();
+                updateOrderSummary();
+            });
+        });
+
+        // Update order summary whenever cart changes
+        updateOrderSummary();
+    }
+
+    // Place Order Button Click Event
+    placeOrderBtn.addEventListener("click", () => {
+        if (cartItems.length === 0) {
+            alert("Your cart is empty.");
+            return;
+        }
+
+        // Show loading spinner
+        loadingSpinner.classList.remove("hidden");
+        placeOrderBtn.setAttribute("disabled", "true");
+
+        setTimeout(() => {
+            loadingSpinner.classList.add("hidden");
+            alert("✅ Order placed successfully!");
+
+            // Clear cart after successful order
+            cartItems = [];
+            saveCartToLocalStorage();
+            updateCartUI();
+            updateOrderSummary();
+
+            // Hide checkout and show Product List View
+            checkoutSection.classList.add("hidden");
+            productListView.classList.remove("hidden");
+            productListView.scrollIntoView({ behavior: "smooth" });
+        }, 2000);
+    });
+
+    // Load cart UI and summary on page load
+    updateCartUI();
+});
+
+</script>
+
+</body>
+
+
+
 
 
     
