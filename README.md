@@ -9,3 +9,7 @@
    ```bash
    cd ecommerce-frontend-design
    ```
+   To access the live link.
+   ```
+   https://jerehn13.github.io/ecommerce-frontend-design/
+   ```
