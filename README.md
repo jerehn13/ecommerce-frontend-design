@@ -1,4 +1,4 @@
-##E-Commerce FrontEnd Design
+ ## E-Commerce FrontEnd Design
 
  - Open a terminal or command prompt.
  - Run the following command to clone the repository:
